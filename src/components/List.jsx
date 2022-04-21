@@ -1,35 +1,28 @@
-import React from 'react'
-import "./List.css"
-import { ArrowForwardIosIcon, ArrowBackIos } from '@mui/icons-material';
-import ListItem from './ListItem';
-
-function List() {
+import React, { useEffect, useState } from 'react'
+import './List.css'
+import ListItem from './ListItem'
+import axios from "../axios"
+function List({ title, url, smallCard }) {
+    const [movies, setMovie] = useState([])
+    useEffect(() => {
+        axios.get(url).then((response) => {
+            // console.log(response.data.results[0], `${imgUrl}${response.data.results[0].poster_path}`);
+            setMovie(response.data.results);
+            console.log(response.data.results)
+        })
+    }, [])
     return (
-        <div>
-            <span className="listTitle">
-                Continue to watch
-            </span>
-            <div className="wrapper">
-                <ArrowBackIos />
-                <div className="container">
-                    <ListItem />
-                    <ListItem />
-                    <ListItem />
-                    <ListItem />
-                    <ListItem />
-                    <ListItem />
-                    <ListItem />
-                    <ListItem />
-                    <ListItem />
-                    <ListItem />
-                    <ListItem />
-                    <ListItem />
-                    <ListItem />
-                    <ListItem />
-                    <ListItem />
-                    <ListItem />
-                </div>
-                <ArrowForwardIosIcon />
+        <div className='row'>
+            <h2>{title}</h2>
+            <div className='posters'>
+                {
+                    movies.map((singleMovie) => {
+                        // console.log(singleMovie)
+                        return (
+                            <ListItem movie={singleMovie} smallCard={smallCard} />
+                        )
+                    })
+                }
             </div>
         </div>
     )
