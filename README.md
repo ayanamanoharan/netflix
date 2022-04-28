@@ -15,4 +15,4 @@ The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
 
-view the app on https://project-netflix-01.herokuapp.com/ 
+ 
